@@ -7,6 +7,7 @@
         <meta name="author" content="Mark Ammari">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Prosto+One&display=swap" rel="stylesheet">
     </head>
     <body>
             <div class="background"></div>
@@ -15,7 +16,29 @@
                     <img src="./assets/brookylnbrewery.png" alt="Brooklyn Brewery"/>
                 </a>
             </header>
+            
+            <h1 class="welcome-text">welcome to brooklyn</h1>
 
+            <section class="age-gate">
+                <p class="warning-text">You must be of legal drinking age to enter this site.</p>
+                <form action="" method="POST">
+                    <select id="month" class="birthday">
+                        <option disabled value="month" selected>Month</option>
+                    </select>
+                    <select id="day" class="birthday">
+                        <option disabled value="day" selected>Day</option>
+                    </select>
+                    <select id="year" class="birthday">
+                        <option disabled value="year" selected>Year</option>
+                    </select>
+                    <div>
+                        <input class="submitBtn" type="submit" value="ENTER" name="ENTER" value="ENTER"/>
+                    </div>
+                    <div>
+                        <a class="restricted-text">I am not of legal drinking age</a>
+                    </div>
+                </form>
+            </section>
 
     </body>
 </html>

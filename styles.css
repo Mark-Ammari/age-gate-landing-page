@@ -7,7 +7,7 @@ body {
     min-height: 100%;
     min-width: 100%;
     background-repeat: repeat;
-    position: absolute;
+    position: fixed;
     z-index: -1;
     left: 0;
     top: 0;
@@ -28,4 +28,60 @@ body {
     text-align: center;
     margin: 2em 0em;
 }
+
+.welcome-text {
+    color: white;
+    margin: 0;
+    text-align: center;
+    font-size: 72px;
+    font-family: 'Prosto One', cursive;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0px, 0px, 40px black
+}
+
+.age-gate {
+    text-align: center;
+}
+
+.warning-text {
+    color: white;
+    font-family: 'Prosto One', cursive;
+    margin: 2em
+}
+
+.birthday {
+    background: white;
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 40px;
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 2em
+}
+
+.submitBtn {
+    font-family: 'Prosto One', cursive;
+    background: green;
+    border: 1px solid black;
+    font-weight: bold;
+    color: white;
+    width: 200px;
+    height: 35px;
+    cursor: pointer;
+    transition: 300ms ease-in-out;
+    margin-bottom: 2em;
+}
+
+.submitBtn:hover {
+    background: darkgreen
+}
+
+.restricted-text {
+    color: green
+}
+
+
+
+
 
