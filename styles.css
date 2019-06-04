@@ -1,0 +1,31 @@
+body {
+    overflow: hidden;
+}
+
+.background {
+    background-image: url(./assets/brickpattern.jpg);
+    min-height: 100%;
+    min-width: 100%;
+    background-repeat: repeat;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+.header {
+    display: flex;
+    line-height: 0px;
+}
+
+.logo {
+    margin: 0 auto
+}
+
+.logo img{
+    height: 140px;
+    width: 140px;
+    text-align: center;
+    margin: 2em 0em;
+}
+
