@@ -22,12 +22,16 @@
             <section class="age-gate">
                 <p class="warning-text">You must be of legal drinking age to enter this site.</p>
                 <form>
-                    <h1 id="success-text" class="welcome-text">Welcome!</h1>
+                    <h1 id="success-text" class="welcome-text"></h1>
                     <select id="month" class="birthday"></select>
                     <select id="day" class="birthday"></select>
                     <select id="year" class="birthday">
                     </select>
-                    <p id="error-text">Sorry, you are not old enough to enter this website</p>
+                    <div class="rememberMe">
+                        <label>Remember Me:</label>
+                        <input class="rememberCheckBox" type="checkbox" name="remember" value="remember"/>
+                    </div>
+                    <p id="error-text"></p>
                     <div>
                         <input class="submitBtn" type="button" value="ENTER" name="ENTER" value="ENTER"/>
                     </div>

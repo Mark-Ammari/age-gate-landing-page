@@ -84,6 +84,27 @@ body {
     text-transform: uppercase;
 }
 
+.rememberMe {
+    text-align: center
+}
+
+.rememberMe label {
+    color: white;
+    font-size: 20px
+}
+
+.rememberMe input {
+    color: green
+}
+
+#success-text {
+    color: green
+}
+
+#error-text {
+    color: red
+}
+
 /* Small Screens */
 @media screen and (min-width: 260px) {
     .welcome-text {
@@ -94,14 +115,6 @@ body {
         margin-left: 5%;
         margin-right: 5%;
     }
-}
-
-#success-text {
-    color: green
-}
-
-#error-text {
-    color: red
 }
 
 /* Medium Screens */

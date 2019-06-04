@@ -1,6 +1,10 @@
 const month = document.querySelector("#month");
 const day = document.querySelector("#day");
 const year = document.querySelector("#year");
+
+const rememberCheckBox = document.querySelector(".rememberCheckBox")
+const rememberMe = document.querySelector(".rememberMe")
+
 const submitBtn = document.querySelector(".submitBtn");
 
 const success = document.querySelector("#success-text");
@@ -27,11 +31,12 @@ function populateBirthdayHandler() {
     for(var i = date.getFullYear() - 100; i <= date.getFullYear(); i++) {
         year.innerHTML += '<option value="' + i + '">' + i + '</option>'
     }
-}
+}       
 
 function submitFormHandler() {
+    checkCookie()
     var userDate = new Date()
-    userDate.setMonth(month.value)
+    userDate.setMonth(month.value - 1)
     userDate.setFullYear(year.value)
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate)
@@ -42,17 +47,15 @@ function submitFormHandler() {
         month.style.display = 'none'
         day.style.display = 'none'
         year.style.display = 'none'
-
+        rememberMe.style.display = 'none'
     } else {
         error.innerHTML = "Sorry, you are not old enough to enter this website."
     }
 }
 
-
 function daysInMonth(month, year) {
     return new Date(year, month, 0).getDate()
 }
-
 
 month.addEventListener('change', function() {
     day.innerHTML = ""
