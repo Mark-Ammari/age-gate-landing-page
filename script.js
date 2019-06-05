@@ -34,14 +34,21 @@ function populateBirthdayHandler() {
 }       
 
 function submitFormHandler() {
-    checkCookie()
     var userDate = new Date()
     userDate.setMonth(month.value - 1)
     userDate.setFullYear(year.value)
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate)
     var someYearsOld = Math.floor(dateDifference / 31536000000)
-    if (someYearsOld >= 21) {
+    if (rememberCheckBox.checked) {
+        checkCookie()
+        success.innerHTML = "Welcome!"
+        error.innerHTML = " "
+        month.style.display = 'none'
+        day.style.display = 'none'
+        year.style.display = 'none'
+        rememberMe.style.display = 'none'
+    } else if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
         month.style.display = 'none'
@@ -68,3 +75,37 @@ window.addEventListener('load', populateBirthdayHandler())
 
 submitBtn.addEventListener('click', submitFormHandler)
 
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  function checkCookie() {
+    var username = getCookie("username");
+    if (username != "") {
+     alert("Welcome again " + username);
+    } else {
+      username = prompt("Please enter your name:", "");
+      if (username != "" && username != null) {
+        setCookie("username", username, 365);
+      }
+    }
+  }
