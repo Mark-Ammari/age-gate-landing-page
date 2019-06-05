@@ -48,6 +48,7 @@ function submitFormHandler() {
         day.style.display = 'none'
         year.style.display = 'none'
         rememberMe.style.display = 'none'
+        submitBtn.style.display = 'none'
     } else if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
@@ -55,6 +56,7 @@ function submitFormHandler() {
         day.style.display = 'none'
         year.style.display = 'none'
         rememberMe.style.display = 'none'
+        submitBtn.style.display = 'none'
     } else {
         error.innerHTML = "Sorry, you are not old enough to enter this website."
     }
