@@ -51,7 +51,7 @@ function submitFormHandler() {
         submitBtn.style.display = 'none'
     } else if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
-        error.innerHTML = " "
+        error.innerHTML = " " 
         month.style.display = 'none'
         day.style.display = 'none'
         year.style.display = 'none'
