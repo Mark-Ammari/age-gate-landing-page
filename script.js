@@ -17,30 +17,37 @@ var months = ['January', 'Feburary', 'March', 'April',
 'November', 'December'
 ]
 
+// When we first load the page we want to populate our select tag with options for the user to pick
 function populateBirthdayHandler() {
     success.innerHTML = " "
     error.innerHTML = " "
     var numOfMonth = 1
     for(var i = 1; i <= daysInMonth(month.value, year.value); i++) {
-        day.innerHTML += '<option value="' + i + '">' + i + '</option>'
+        day.innerHTML += '<option value="' + i + '">' + i + '</option>' // populate days
     }
     months.forEach(m => {
-        month.innerHTML += '<option value="' + numOfMonth++ + '">' + m + '</option>'
+        month.innerHTML += '<option value="' + numOfMonth++ + '">' + m + '</option>' // populate months
     });
 
     for(var i = date.getFullYear() - 100; i <= date.getFullYear(); i++) {
-        year.innerHTML += '<option value="' + i + '">' + i + '</option>'
+        year.innerHTML += '<option value="' + i + '">' + i + '</option>' // populate 100 years.
     }
 }       
 
+/* 
+  Make a submit form handler that keeps track of user select data,
+  check if the user is >= 21, if they are, show Welcome message
+  if user is < 21 then show an error message that they are too young
+  and a checkbox to remember the user every time they check the "remember me checkbox"
+*/
 function submitFormHandler() {
     var userDate = new Date()
-    userDate.setMonth(month.value - 1)
+    userDate.setMonth(month.value - 1) 
     userDate.setFullYear(year.value)
     userDate.setDate(day.value)
-    var dateDifference = Math.abs(date - userDate)
-    var someYearsOld = Math.floor(dateDifference / 31536000000)
-    if (rememberCheckBox.checked) {
+    var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
+    var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
+    if (rememberCheckBox.checked && someYearsOld >= 21) {
         checkCookie()
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
@@ -63,13 +70,17 @@ function submitFormHandler() {
 }
 
 function daysInMonth(month, year) {
-    return new Date(year, month, 0).getDate()
+    return new Date(year, month, 0).getDate() // gives the days of a certain month
 }
 
+/* 
+everytime we select a particular month the days 
+select tag will repopulate with the appropriate days in that month
+*/
 month.addEventListener('change', function() {
     day.innerHTML = ""
-    for(var i = 1; i <= daysInMonth(month.value, year.value); i++) {
-        day.innerHTML += '<option value="' + i + '">' + i + '</option>'
+    for(var i = 1; i <= daysInMonth(month.value, year.value); i++) { 
+        day.innerHTML += '<option value="' + i + '">' + i + '</option>' 
     }
 })
 
