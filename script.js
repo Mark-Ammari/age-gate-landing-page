@@ -50,17 +50,14 @@ function submitFormHandler() {
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
     if (rememberCheckBox.checked) {
-      if (someYearsOld >= 21) {
-          isOldEnough = true
-          checkCookie()
-          success.innerHTML = "Welcome!"
-          error.innerHTML = " "
-          month.style.display = 'none'
-          day.style.display = 'none'
-          year.style.display = 'none'
-          rememberMe.style.display = 'none'
-          submitBtn.style.display = 'none'
-        }
+        checkCookie(isOldEnough)
+        success.innerHTML = "Welcome!"
+        error.innerHTML = " "
+        month.style.display = 'none'
+        day.style.display = 'none'
+        year.style.display = 'none'
+        rememberMe.style.display = 'none'
+        submitBtn.style.display = 'none'
     } else if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " " 
@@ -118,13 +115,13 @@ function getCookie(cname) {
     return "";
   }
 
-  function checkCookie() {
+  function checkCookie(age) {
     var username = getCookie("username");
     if (username != "") {
      alert("Welcome again " + username);
     } else {
       username = prompt("Please enter your name:", "");
-      if (username != "" && username != null) {
+      if (username != "" && username != null && age) {
         setCookie("username", username, 365);
       }
     }
