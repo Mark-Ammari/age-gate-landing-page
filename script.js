@@ -41,14 +41,14 @@ function populateBirthdayHandler() {
   and a checkbox to remember the user every time they check the "remember me checkbox"
 */
 function submitFormHandler() {
+    checkCookie()
     var userDate = new Date()
     userDate.setMonth(month.value - 1) 
     userDate.setFullYear(year.value)
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
-    if (rememberCheckBox.checked && someYearsOld >= 21) {
-        checkCookie()
+    if (rememberCheckBox.checked) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
         month.style.display = 'none'
