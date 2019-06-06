@@ -50,7 +50,7 @@ function submitFormHandler() {
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
     if (rememberCheckBox.checked) {
-        checkCookie(isOldEnough)
+        checkCookie(someYearsOld >= 21)
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
         month.style.display = 'none'
