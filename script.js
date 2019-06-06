@@ -42,6 +42,19 @@ function populateBirthdayHandler() {
   if user is < 21 then show an error message that they are too young
   and a checkbox to remember the user every time they check the "remember me checkbox"
 */
+rememberCheckBox.addEventListener('change', function() {
+  if (rememberCheckBox.checked && isOldEnough) {
+    checkCookie()
+    success.innerHTML = "Welcome!"
+    error.innerHTML = " "
+    month.style.display = 'none'
+    day.style.display = 'none'
+    year.style.display = 'none'
+    rememberMe.style.display = 'none'
+    submitBtn.style.display = 'none'
+  } 
+})
+
 function submitFormHandler() {
     var userDate = new Date()
     userDate.setMonth(month.value - 1) 
@@ -49,16 +62,7 @@ function submitFormHandler() {
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
-    if (rememberCheckBox.checked && isOldEnough) {
-        checkCookie()
-        success.innerHTML = "Welcome!"
-        error.innerHTML = " "
-        month.style.display = 'none'
-        day.style.display = 'none'
-        year.style.display = 'none'
-        rememberMe.style.display = 'none'
-        submitBtn.style.display = 'none'
-    } else if (someYearsOld >= 21) {
+    if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " " 
         month.style.display = 'none'
@@ -67,10 +71,10 @@ function submitFormHandler() {
         rememberMe.style.display = 'none'
         submitBtn.style.display = 'none'
         isOldEnough = true
-      } else {
+    } else {
         error.innerHTML = "Sorry, you are not old enough to enter this website."
         isOldEnough = false
-      }
+    }
 }
 
 function daysInMonth(month, year) {
