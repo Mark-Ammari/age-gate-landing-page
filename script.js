@@ -117,10 +117,9 @@ function getCookie(cname) {
 
   function checkCookie(age) {
     var username = getCookie("username");
-    if (username != "") {
+    if (username != "" && age) {
      alert("Welcome again " + username);
     } else {
-      username = prompt("Please enter your name:", "");
       if (username != "" && username != null && age) {
         setCookie("username", username, 365);
       }
