@@ -12,7 +12,7 @@ const error = document.querySelector("#error-text");
 
 var date = new Date();
 
-var isOldEnough = false
+var isOldEnough = false;
 
 var months = ['January', 'Feburary', 'March', 'April',
 'May', 'June', 'July', 'August', 'September', 'October',
@@ -49,8 +49,8 @@ function submitFormHandler() {
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
-    if (rememberCheckBox.checked) {
-        checkCookie(someYearsOld >= 21)
+    if (rememberCheckBox.checked && isOldEnough) {
+        checkCookie()
         success.innerHTML = "Welcome!"
         error.innerHTML = " "
         month.style.display = 'none'
@@ -70,7 +70,7 @@ function submitFormHandler() {
       } else {
         error.innerHTML = "Sorry, you are not old enough to enter this website."
         isOldEnough = false
-    }
+      }
 }
 
 function daysInMonth(month, year) {
@@ -115,12 +115,13 @@ function getCookie(cname) {
     return "";
   }
 
-  function checkCookie(age) {
+  function checkCookie() {
     var username = getCookie("username");
-    if (username != "" && age) {
+    if (username != "") {
      alert("Welcome again " + username);
     } else {
-      if (username != "" && username != null && age) {
+      username = prompt("Please enter your name:", "");
+      if (username != "" && username != null) {
         setCookie("username", username, 365);
       }
     }
