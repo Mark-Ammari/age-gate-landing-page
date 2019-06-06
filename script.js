@@ -12,6 +12,8 @@ const error = document.querySelector("#error-text");
 
 var date = new Date();
 
+var isOldEnough = false
+
 var months = ['January', 'Feburary', 'March', 'April',
 'May', 'June', 'July', 'August', 'September', 'October',
 'November', 'December'
@@ -48,7 +50,8 @@ function submitFormHandler() {
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
     if (rememberCheckBox.checked) {
-        if (someYearsOld >= 21) {
+      if (someYearsOld >= 21) {
+          isOldEnough = true
           checkCookie()
           success.innerHTML = "Welcome!"
           error.innerHTML = " "
@@ -66,8 +69,10 @@ function submitFormHandler() {
         year.style.display = 'none'
         rememberMe.style.display = 'none'
         submitBtn.style.display = 'none'
-    } else {
+        isOldEnough = true
+      } else {
         error.innerHTML = "Sorry, you are not old enough to enter this website."
+        isOldEnough = false
     }
 }
 
@@ -90,11 +95,11 @@ window.addEventListener('load', populateBirthdayHandler())
 
 submitBtn.addEventListener('click', submitFormHandler)
 
-function setCookie(cage, cvalue, exdays) {
+function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
-    document.cookie = cage + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
 function getCookie(cname) {
