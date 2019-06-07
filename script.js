@@ -116,6 +116,6 @@ function getCookie(cname, cage) {
   function checkCookie(age) {
     var username = getCookie("username", age);
     if (username != "" && username != null) {
-        setCookie("username", username, 365);
+        setCookie("username", username, "age", age, 365);
     }
   }
