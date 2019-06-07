@@ -99,10 +99,13 @@ function getCookie(cname, cage) {
     var age = cage + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
+    console.log(ca, "102")
     for(var i = 0; i <ca.length; i++) {
       var c = ca[i];
+      console.log(c, "105")
       while (c.charAt(0) == ' ') {
         c = c.substring(1);
+        console.log(c, "108")
       }
       if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
