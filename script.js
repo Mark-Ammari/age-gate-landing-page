@@ -107,7 +107,7 @@ function getCookie(cname, cage) {
       if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
       }
-      if (c.indexOf(age) == 0) {
+      if (c.indexOf(age) == 1) {
         return c.substring(age.length, c.length);
       }
     }
