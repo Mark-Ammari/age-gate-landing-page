@@ -106,7 +106,8 @@ function getCookie(cname, cage) {
       }
       if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
-      } else {
+      }
+      if (c.indexOf(age) == 0) {
         return c.substring(age.length, c.length);
       }
     }
@@ -115,7 +116,12 @@ function getCookie(cname, cage) {
 
   function checkCookie(age) {
     var username = getCookie("username", age);
-    if (username != "" && username != null) {
+    if (username != "") {
+     alert("Welcome again " + username);
+    } else {
+      username = prompt("Please enter your name:", "");
+      if (username != "" && username != null) {
         setCookie("username", username, "age", age, 365);
+      }
     }
   }
