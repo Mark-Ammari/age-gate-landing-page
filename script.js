@@ -44,16 +44,28 @@ function populateBirthdayHandler() {
 */
 
 function submitFormHandler() {
-    var userDate = new Date()
-    userDate.setMonth(month.value - 1) 
-    userDate.setFullYear(year.value)
-    userDate.setDate(day.value)
-    var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
-    var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
+  var userDate = new Date()
+  userDate.setMonth(month.value - 1) 
+  userDate.setFullYear(year.value)
+  userDate.setDate(day.value)
+  var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
+  var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
     if (rememberCheckBox.checked) {
       checkCookie(someYearsOld)
+      if (someYearsOld >= 21 || document.cookie.substring(4, 7) >= 21) {
+        success.innerHTML = "Welcome!"
+        error.innerHTML = " " 
+        month.style.display = 'none'
+        day.style.display = 'none'
+        year.style.display = 'none'
+        rememberMe.style.display = 'none'
+        submitBtn.style.display = 'none'
+        isOldEnough = true
+    } else if (someYearsOld < 21) {
+        error.innerHTML = "Sorry, you are not old enough to enter this website."
+        isOldEnough = false
     }
-    if (someYearsOld >= 21) {
+    } else if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " " 
         month.style.display = 'none'
@@ -87,44 +99,36 @@ window.addEventListener('load', populateBirthdayHandler())
 
 submitBtn.addEventListener('click', submitFormHandler)
 
-function setCookie(cname, cvalue1, cage, cvalue2, exdays) {
+function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue1 + ";" + cage + "=" + cvalue2 + ";" + expires + ";path=/";
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function getCookie(cname, cage) {
-    var name = cname + "=";
-    var age = cage + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    console.log(ca, "102")
-    for(var i = 0; i <ca.length; i++) {
-      var c = ca[i];
-      console.log(c, "105")
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-        console.log(c, "108")
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-      if (c.indexOf(age) == 1) {
-        return c.substring(age.length, c.length);
-      }
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(' ');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
     }
-    return "";
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
   }
+  return "";
+}
 
-  function checkCookie(age) {
-    var username = getCookie("username", age);
-    if (username != "") {
-     alert("Welcome again " + username);
-    } else {
-      username = prompt("Please enter your name:", "");
-      if (username != "" && username != null) {
-        setCookie("username", username, "age", age, 365);
-      }
+function checkCookie(age) {
+  var user = getCookie("age");
+  if (user != "") {
+    alert("Welcome again " + window.clientInformation.userAgent);
+  } else {
+    user = age;
+    if (user != "" && user != null && age >= 21) {
+      setCookie("age", user, 365);
     }
   }
+}
