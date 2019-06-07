@@ -42,18 +42,6 @@ function populateBirthdayHandler() {
   if user is < 21 then show an error message that they are too young
   and a checkbox to remember the user every time they check the "remember me checkbox"
 */
-rememberCheckBox.addEventListener('change', function() {
-  if (rememberCheckBox.checked && isOldEnough) {
-    checkCookie()
-    success.innerHTML = "Welcome!"
-    error.innerHTML = " "
-    month.style.display = 'none'
-    day.style.display = 'none'
-    year.style.display = 'none'
-    rememberMe.style.display = 'none'
-    submitBtn.style.display = 'none'
-  } 
-})
 
 function submitFormHandler() {
     var userDate = new Date()
@@ -62,6 +50,9 @@ function submitFormHandler() {
     userDate.setDate(day.value)
     var dateDifference = Math.abs(date - userDate) // subtract todays date with user birthday
     var someYearsOld = Math.floor(dateDifference / 31536000000) // convert miliseconds to age
+    if (rememberCheckBox.checked) {
+      checkCookie(someYearsOld)
+    }
     if (someYearsOld >= 21) {
         success.innerHTML = "Welcome!"
         error.innerHTML = " " 
@@ -96,15 +87,16 @@ window.addEventListener('load', populateBirthdayHandler())
 
 submitBtn.addEventListener('click', submitFormHandler)
 
-function setCookie(cname, cvalue, exdays) {
+function setCookie(cname, cvalue1, cage, cvalue2, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = cname + "=" + cvalue1 + ";" + cage + "=" + cvalue2 + ";" + expires + ";path=/";
 }
 
-function getCookie(cname) {
+function getCookie(cname, cage) {
     var name = cname + "=";
+    var age = cage + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for(var i = 0; i <ca.length; i++) {
@@ -115,12 +107,15 @@ function getCookie(cname) {
       if (c.indexOf(name) == 0) {
         return c.substring(name.length, c.length);
       }
+      if (c.indexOf(age) == 0) {
+        return c.substring(age.length, c.length);
+      }
     }
     return "";
   }
 
-  function checkCookie() {
-    var username = getCookie("username");
+  function checkCookie(age) {
+    var username = getCookie("username", age);
     if (username != "") {
      alert("Welcome again " + username);
     } else {
